@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Job Listings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    .job-listings {
+      flex: 1;
+      padding: 2em;
+      max-width: 100%; 
+      background-color: #f7f7f7;
+    }
+    .job-card {
+      position: relative;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 1em 0;
+      padding: 1em;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: white;
+      
+    }
+    .job-card.selected {
+      border-color: green;
+    }
+    .company-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 1em;
+    }
+    .technology {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      background-color: lightgreen;
+      padding: 0.25em 0.5em;
+      border-radius: 3px;
+      font-size: 12px;
+      color: darkgreen;
+    }
+    .job-company {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 0.25em;
+      display: flex;
+      align-items: center;
+    }
+    .job-details {
+      font-size: 14px;
+      color: #03AC13;
+      margin-bottom: 0.25em;
+    }
+    .job-salary {
+      font-size: 14px;
+      color: #555;
+    }
+    .star-rating {
+        font-size: 14px;
+        color: #555;
+        margin-left: 10px;
+
+    }
+    .star {
+      color: black; 
+      margin-right: 3px;
+    }
+    .divider {
+      width: 100%;
+      border-top: 1px solid #ddd;
+      margin: 0.5em 0;
+    }
+    .skills {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .skill {
+      background-color: lightgreen;
+      color: darkgreen;
+      padding: 0.25em 0.5em;
+      border-radius: 3px;
+      font-size: 12px;
+      margin: 2px;
+    }
+    .selected-job {
+      display: none; 
+    }
+    .card-text {
+     text-align: left;
+     margin-top: 0.5em;
+    }
+    .skills {
+     position: absolute;
+     bottom: 0.5em;
+     left: 0.5em;
+     display: flex;
+     flex-wrap: wrap;
+    }
+   .company-icon {
+     width: 40px;
+     margin-right: 1em;
+     display: flex;
+     align-items: center;
+    }
+    .card-content {
+     display: flex;
+     align-items: flex-start;
+    }
+    .divider {
+     display: block;
+     position: relative;
+     width: 100%;
+     border-top: 1px solid #ddd;
+     margin: 0.5em 0 0; 
+    }
+
+
+
+    
+    @media (min-width: 768px) {
+      .job-listings {
+        max-width: 40%; 
+      }
+      .selected-job {
+        flex: 1;
+        padding: 2em;
+        background-color: #f7f7f7;
+        border-left: 1px solid #ddd;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="job-listings" id="jobListings">
+    <!-- Job Card 1 -->
+    <div class="job-card" onclick="showJobTitle('Technical Product Manager (Cloud)', 'Company A', 'City A', '2 days ago', 4.5, 'Frontend', ['HTML', 'CSS', 'JavaScript'])">
+      <div class="card-content">
+      <div class="company-icon">
+      <img src="https://nus.edu.sg/cfg/images/default-source/events-company-logo/govtech.png?sfvrsn=dd9f03c1_4" alt="Company A Icon" class="company-icon">
+      </div>
+      <div class="card-text">
+      <div class="job-company"><b>GovTech</b><span class="star-rating"><span class="star">4</span> ★</span></div>
+      <b>Technical Product Manager<br> (Cloud)</b><div class="technology">PM</div><div class="job-details"><b>less than a minute ago</b><span style = "color: #013220">  <i class="material-icons" style="font-size:15px;color:green">&#xe55f;</i>Singapore</span></div><span class="divider"></span><br><div class="skills"><span class="skill">play</span><span class="skill">IAM</span></div>
+    </div>
+      </div>
+    </div>
+    <!-- Job Card 2 -->
+    <div class="job-card" onclick="showJobTitle('Staff, Back-end Engineer (Coupang Play)', 'Company B', 'City B', '5 hours ago', 3.8, 'Backend', ['Java', 'SQL', 'Spring'])">
+      <div class="card-content">
+      <div class="company-icon">
+      <img src="https://liftoff.io/wp-content/uploads/2017/12/coupang_logo-900x196.png" alt="Company B Icon" class="company-icon">
+      </div>
+      <div class="card-text">
+      <div class="job-company"><b>Coupang</b><span class="star-rating"><span class="star">3.9</span> ★</span></div>
+      <b>Staff, Back-end Engineer<br> (Coupang Play)</b><div class="technology">Backend</div><div class="job-details"><b>37 minutes ago</b><span style = "color: #013220"> <i class="material-icons" style="font-size:15px;color:green">&#xe55f;</i> Singapore</span></div><div class="job-salary"><b>S$12,500 - S$20,250 / mth</b> <span class="skill">EST</span></div><span class="divider"></span><br><div class="skills"><span class="skill">Rest API</span><span class="skill">API</span><span class="skill">play</span><span class="skill">Modular</span><span class="skill">Node.js</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Job Card 3 -->
+    <div class="job-card" onclick="showJobTitle('Senior Software Engineer(.NET)', 'Company A', 'City A', '2 days ago', 4.5, 'Frontend', ['HTML', 'CSS', 'JavaScript'])">
+      <div class="card-content">
+      <div class="company-icon">
+      <img src="https://blooloop.com/wp-content/uploads/2018/03/embed_red_outline-768x310.png" alt="Company A Icon" class="company-icon">
+      </div>
+      <div class="card-text">
+      <div class="job-company"><b>Embed</b><span class="star-rating"><span class="star">3.5</span> ★</span></div>
+      <b>Senior Software Engineer<br>(.NET)</b><div class="technology">Fullstack</div><div class="job-details"><b>about 1 hour ago</b><span style = "color: #013220"> <i class="material-icons" style="font-size:15px;color:green">&#xe55f;</i> Singapore</span></div><span class="divider"></span><br><div class="skills"><span class="skill">Rest API</span><span class="skill">Docker</span><span class="skill">API</span><span class="skill">TDD</span><span class="skill">JavaScript</span></div>
+    </div>
+      </div>
+    </div>
+
+<!-- Job Card 4 -->
+    <div class="job-card" onclick="showJobTitle('Principal Engineer, Security', 'Company A', 'City A', '2 days ago', 4.5, 'Frontend', ['HTML', 'CSS', 'JavaScript'])">
+      <div class="card-content">
+      <div class="company-icon">
+      <img src="https://th.bing.com/th/id/OIP.VnU7fRCfAS8E1ubCY4MRZwHaHa?pid=ImgDet&rs=1" alt="Company A Icon" class="company-icon">
+        </div>
+      <div class="card-text">
+      <div class="job-company"><b>Circles.Life</b><span class="star-rating"><span class="star">3</span> ★</span></div>
+      <b>Principal Engineer,<br> Security</b><div class="technology">Cybersec Eng</div><div class="job-details"><b>about 1 hour ago</b><span style = "color: #013220"> <i class="material-icons" style="font-size:15px;color:green">&#xe55f;</i> Singapore</span></div><div class="job-salary"><b>S$12,500 - S$20,500 / mth</b> <span class="skill">EST</span></div><span class="divider"></span><br><div class="skills"><span class="skill">Rest API</span><span class="skill">Python</span><span class="skill">Linux</span></div>
+    </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="selected-job" id="selectedJob">
+    <p id="selectedJobTitle"></p>
+  </div>
+  <script>
+    function showJobTitle(title, company, location, timeAgo, rating, technology, skills) {
+      const selectedJobTitleElement = document.getElementById("selectedJobTitle");
+      selectedJobTitleElement.textContent = title;
+
+      const jobCards = document.querySelectorAll(".job-card");
+      jobCards.forEach(card => card.classList.remove("selected"));
+
+      event.currentTarget.classList.add("selected");
+    }
+  </script>
+</body>
+</html>
